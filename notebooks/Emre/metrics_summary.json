@@ -1,0 +1,18 @@
+{
+  "train_shape": [
+    4920,
+    133
+  ],
+  "test_shape": [
+    42,
+    133
+  ],
+  "n_features": 132,
+  "n_classes": 41,
+  "best_k": 1,
+  "best_k_cv_accuracy": 1.0,
+  "knn_test_accuracy": 1.0,
+  "rf_test_accuracy": 0.9761904761904762,
+  "knn_macro_f1": 1.0,
+  "rf_macro_f1": 0.9837398373983739
+}

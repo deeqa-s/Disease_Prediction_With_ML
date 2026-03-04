@@ -1,0 +1,18 @@
+{
+  "missing_train_total": 0,
+  "missing_test_total": 0,
+  "feature_unique_values": [
+    0,
+    1
+  ],
+  "n_classes": 41,
+  "class_min_count": 120,
+  "class_max_count": 120,
+  "class_mean_count": 120.0,
+  "symptoms_per_record_min": 3,
+  "symptoms_per_record_max": 17,
+  "symptoms_per_record_mean": 7.4487804878048784,
+  "symptoms_per_record_median": 6.0,
+  "feature_prevalence_mean": 0.05643015521064302,
+  "feature_prevalence_max": 0.3926829268292683
+}

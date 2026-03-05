@@ -1,0 +1,4 @@
+Model,CV Accuracy,CV Accuracy Std,CV Macro F1,CV Macro F1 Std,CV Weighted F1,Test Accuracy,Test Macro F1,Test Weighted F1,Test Precision,Test Recall,Train Time (s)
+KNN (k=5),1.0,0.0,1.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0,0.008
+Logistic Regression,1.0,0.0,1.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0,0.056
+XGBoost,1.0,0.0,1.0,0.0,1.0,0.9761904761904762,0.9837398373983739,0.9761904761904762,0.9878048780487805,0.9878048780487805,3.726

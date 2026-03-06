@@ -15,4 +15,5 @@ dependencies = [
     "statsmodels>=0.14.5",
     "xgboost",
     "shap",
+    "adjusttext",
 ]

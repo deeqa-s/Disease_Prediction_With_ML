@@ -1,4 +1,4 @@
-# Disease Prediction Using Machine Learning 
+git # Disease Prediction Using Machine Learning 
 
 ## Members
 ### Cohort: 8, Team: ML06
@@ -68,7 +68,7 @@ The ultimate objective is to demonstrate how interpretable machine learning can 
 ### Stakeholders
 
 Technical stakeholders:
-* Data scientists and ML engineers:
+* Data scientists and ML engineers
 * Public health departments
 
 Institutional stakeholders:
@@ -81,31 +81,19 @@ Institutional stakeholders:
 # Dataset 
 ## Details 
 
+The dataset contains 4920 observations, each representing a patient record.
+There are 134 columns, including 132 symptom features, one target variable (prognosis), and one extra column that was later removed (originally an index column from the CSV).
+The symptom features are binary (0 = absence, 1 = presence) indicating whether each symptom is observed for a patient.
+The target variable prognosis is categorical with 41 unique disease classes.
+
+![alt text](image.png)
+
 | Property | Details |
 |---|---|
 | **Source** | [Kaggle – Disease Prediction Using Machine Learning](https://www.kaggle.com/datasets/kaushil268/disease-prediction-using-machine-learning/data) |
 | **Author** | kaushil268 |
-| **Files** | `Training.csv`, `Testing.csv` |
-| **Total Columns** | 133 |
-| **Feature Columns** | 132 (binary symptom indicators: 0 = absent, 1 = present) |
-| **Target Column** | `prognosis` (disease label) |
-| **Training Rows** | 4,920 |
-| **Testing Rows**  | 42 |
-| **Number of Disease Classes** | 41 |
 
-##  Variables / Features 
 
-The datatset contains 132 binary symptom features. Each recording if the symptom is present or absent. 
-
-Example include: `itching`, `skin_rash`, `nodal_skin_eruptions`, `continuous_sneezing`, `shivering`, `chills`, `joint_pain`, `stomach_pain`, `acidity`, `vomiting`, `fatigue`, `weight_gain`, `anxiety`, `cold_hands_and_feets`, `mood_swings`, `weight_loss`, `restlessness`, `lethargy`, `patches_in_throat`, `irregular_sugar_level`, and many others.
-
-## Target Variable
-
-The `prognosis` column within the dataset contains the disease labels and is our Target variable. Each row has one of 41 potential labels.
-
-The 41 classes span infectious diseases (e.g., Typhoid, Dengue, Malaria), chronic conditions (e.g., Diabetes, Hypertension, Arthritis), skin disorders (e.g., Psoriasis, Fungal infection), and gastrointestinal/respiratory conditions.
-
----
 ## Identified Issues and Limitations
 
 #### 1. Synthetic / Rule-Based Data
@@ -129,7 +117,6 @@ Each row is an isolated symptom profile. Real diagnosis often depends on how sym
 
 > **Due to the above, we belive that some models may achieve near-perfect accuracy in this environment while failing to generalize to real-world clinical settings.**
 
->**_Results should be interpreted accordingly._**
 
 ---
 # Methodology 
@@ -228,3 +215,60 @@ We have listed the model choices below for each team member.
 
 ## References
 
+## Exploratory Data Analysis
+Data set overview
+- The Training dataset contains 1 target variable, `prognosis`  and 132 feature variables
+There are a total of 4920 observations.
+The 132 features are binary (0 = absence, 1 = presence).
+There are no missing values in any variable
+There are 94 % of duplicates.
+[text](results/emre_results/eda_summary.json)
+
+- The testing data set from the kaggle, contains 42 observations (patients) and 133 columns. Each row represents an individual patient record, while the columns represent symptom indicators and the target disease label.
+
+[text](results/emre_results/metrics_summary.json)
+## Target Variable
+
+The `prognosis` column within the dataset contains the disease labels and is our Target variable. The 41 classes span infectious diseases are all perfectly balanced and contained each 120 observations. 
+![alt text](results/emre_results/eda_class_balance.png)
+
+Most individuals report between 3 and 6 symptoms, with fewer cases exhibiting a high symptom burden (>14 symptoms). This suggests moderate variability in symptom presentation across patients.
+
+
+![alt text](results/Ecce_results/avg_symptoms_per_disease.png)
+
+Symptoms such as fatigue,vomiting, high fever appear frequently across multiple diseases.
+
+![alt text](results/james_results/top_symptoms.png)
+
+ Certain diseases show strong associations with specific symptoms, which may help machine learning models distinguish between conditions.
+ ![alt text](results/emre_results/eda_top20_symptom_correlation.png)
+
+
+ # Model development and Evaluation
+ ## Model 1: Logistic Regression
+The experiment was conducted by splitting the dataset into training and test dataset, stratified. Logistic regression model was used. The following results were obtained:
+
+ [text](results/amena_results/logistic_regression_metrics.json)
+
+
+![alt text](results/amena_results/logistic_regression_confusion_matrix.png)
+
+
+## Model 2: Random Forest
+Random Forest is an ensemble learning algorithm that builds multiple decision trees and combines their predictions.
+
+[text](results/amena_results/random_forest_metrics.json)
+![alt text](results/emre_results/rf_confusion_matrix.png)
+
+
+With an accuraccy of 0.97619, the following results were obtained:
+Muscle pain, itching, etc are the top features
+![alt text](results/amena_results/rf_top_30_features.png)
+
+## Model 3: Bernoulli Naive Bayes
+Bernoulli Naive Bayes has been run and here are the results:
+
+[text](results/Ecce_results/bernoulli_nb_results.json)
+
+![alt text](results/Ecce_results/bernoulli_confusion_matrix.png)

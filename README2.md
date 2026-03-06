@@ -156,7 +156,7 @@ K-Nearest Neighbors (KNN)| Non Paramteric Comparitor, Highly Interpretable
 - **scikit-learn**: Fit and evaluate supervised and unsupervised ML models
 - **pandas**: Load and explore the dataset
 - **numpy**: Basic data manipulations
-- **matplotlib**: Create visualizations
+- **matplotlib**: Create visualizations.
 
 ## Repository Structure
 

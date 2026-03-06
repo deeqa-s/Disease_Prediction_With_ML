@@ -1,0 +1,7 @@
+,Bernoulli NB,Decision Tree
+CV Accuracy (mean),1.0,1.0
+Test Accuracy,1.0,0.9762
+Precision (macro),1.0,0.9878
+Recall (macro),1.0,0.9878
+F1 (macro),1.0,0.9837
+F1 (weighted),1.0,0.9762

@@ -22,12 +22,23 @@
 - [Potential Risks and Uncertainty](#potential-risks-and-uncertainty) 
 - [Methodology](#methodology) 
     * [Modeling Approach](#modeling-approach) 
-    * [Planned Workflow](#planned-workflow)
     * [Technical Stack](#technical-stack)
-- [Repository Structure](#rep) 
+- [Repository Structure](#repository-structure) 
 - [Task Log](#task-log)
     * [Task Completed (Week 1)](#task-completed-week-1)
-    * [Task (Week 2)](#task-assignment-for-first-half-of-week-2)
+    * [Task Completed (Week 2)](#task-completed-week-2)
+- [Exploratory Data Analysis](#exploratory-data-analysis)
+- [Model Development and Evaluation](#model-development-and-evaluation)
+    * [Model 1: Logistic Regression](#model-1-logistic-regression)
+    * [Model 2: Decision Tree Model](#model-2-decision-tree-model)
+    * [Model 3: Bernoulli Naive Bayes](#model-3-bernoulli-naive-bayes)
+    * [Model 4: Random Forest](#model-4-random-forest)
+    * [Model 5: XGBoost](#model-5-xgboost)
+    * [Model 6: Hierarchical and KNN Clustering](#model-6-hierarchical-and-knn-clustering)
+- [Model Comparisons](#model-comparisons)
+- [Conclusions](#conclusions)
+- [Future Directions](#future-directions)
+- [Team Videos](#team-videos)
 - [References](#references)
 
 ---
@@ -96,7 +107,7 @@ The ultimate objective is to demonstrate how interpretable machine learning can 
 
 ##  Variables / Features 
 
-The dataset contains 132 binary symptom features. Each recording if the symptom is present or absent. 
+The dataset contains 132 binary symptom features. Each recording if the symptom is present (1) or absent (0). 
 
 Example include: `itching`, `skin_rash`, `nodal_skin_eruptions`, `continuous_sneezing`, `shivering`, `chills`, `joint_pain`, `stomach_pain`, `acidity`, `vomiting`, `fatigue`, `weight_gain`, `anxiety`, `cold_hands_and_feets`, `mood_swings`, `weight_loss`, `restlessness`, `lethargy`, `patches_in_throat`, `irregular_sugar_level`, and many others.
 
@@ -108,23 +119,23 @@ The 41 classes span infectious diseases (e.g., Typhoid, Dengue, Malaria), chroni
 
 ## Identified Issues and Limitations
 
-#### 1. Synthetic / Rule-Based Data
+**1. Synthetic / Rule-Based Data**
 The dataset does *not* appear to originate from real clinical records. Symptom-to-disease mappings seem algorithmically generated, likely lacking noise, ambiguity, and co-morbidities found in real patients. 
 
-#### 2. Artificially Balanced Classes
+**2. Artificially Balanced Classes**
 Each disease class likely has a uniform or near-uniform number of records. This does not reflect clinical reality of disease prevalence.
 
-#### 3. Binary Encoding Loses Clinical Nuance
+**3. Binary Encoding Loses Clinical Nuance**
 All symptoms are encoded as binary 0/1 flags. 
 Severity, duration, and interaction patterns are not being considered.
 
-#### 4. No Patient Demographics
+**4. No Patient Demographics**
 There are no features for age, sex, geographic region, or medical history.
 
-#### 5. High Dimensionality with Potentially Sparse Features
+**5. High Dimensionality with Potentially Sparse Features**
 With 132 binary features, many symptoms may be near-zero variance or irrelevant for most disease classes. Feature selection is necessary to avoid overfitting and to improve model interpretability.
 
-#### 6. No Temporal Information
+**6. No Temporal Information**
 Each row is an isolated symptom profile. Real diagnosis often depends on how symptoms evolve over time, which this dataset does not capture.
 
 > **Due to the above, we believe that some models may achieve near-perfect accuracy in this environment while failing to generalize to real-world clinical settings.**
@@ -152,26 +163,17 @@ Decision Tree | Visualizable and Easy to Communicate
 Bernoulli Naive Bayes | Most Appropriate for Binary Features
 Random Forest | Robust, Handles Binary Features Well
 XGBoost | High Interpretability, Strong performance 
-K-Nearest Neighbors (KNN)| Non Parametric Comparator, Highly Interpretable  
-
-## Planned Workflow
-| Phase | Tasks |
-|---|---|
-| **EDA** | Class distribution, Symptom frequency, Symptom Heatmap, Symptom-disease Association Matrix |
-| **Preprocessing** |  Feature selection, Label encoding of `prognosis` |
-| **Modeling** | Train all models listed above; use 5-fold CV on training data |
-| **Evaluation** | Accuracy, Confusion matrix, Per-class metrics; Compare all models in a summary table |
-| **Interpretability** | Feature importance's, SHAP values, Result visualizations |
-| **Reporting** | Discuss accuracy results, Highlight most predictive symptoms, Examine hardest-to-separate disease pairs, Discuss clinical limitations |
-
+K-Nearest Neighbors (KNN) & Hierarchical Clustering| Non Parametric Comparator, Highly Interpretable  
 
 ## Technical stack
 - **scikit-learn**: Fit and evaluate supervised and unsupervised ML models
+- **xgboost:** Fit & evaluate XGBoost models
 - **pandas**: Load and explore the dataset
 - **numpy**: Basic data manipulations
 - **matplotlib**: Create visualizations
 
-## Repository Structure
+---
+# Repository Structure
 
 ```
 Disease_Prediction_With_ML/
@@ -183,26 +185,37 @@ Disease_Prediction_With_ML/
 │       └── Testing.csv
 │
 ├── experiments/
-│
-├── models/
+│   ├── EDA_deeqa.ipynb
+│   ├── Decision_Tree_Analysis.ipynb
+│   └── hier_clustering_deeqa.ipynb
 │
 ├── notebooks/
-│   ├── 01_.ipynb
-│   ├── 02_.ipynb
-│   ├── 03_.ipynb
-│   └── 04_.ipynb
-│
-├── src/
+│   ├── Aakash_xgb_knn.ipynb
+│   ├── All_Model_comparisons_together.ipynb
+│   ├── EDA_model_data_training.ipynb
+│   ├── EDA_Training_data.ipynb
+│   ├── emre-knn-random-forest.ipynb
+│   ├── Logistic-Random-Amena.ipynb
+│   └── Naive_Bayes_James.ipynb
 │
 ├── results/
+│   ├── aakash_results/
+│   ├── amena_results/
+│   ├── comparison_results/
+│   ├── Ecce_results/
+│   ├── emre_results/
+│   └── james_results/
+│
+├── SETUP.md
 │
 └── README.md
 ```
 Brief Description of the folders: 
 * **Data:** Contains the raw data. 
 * **Experiments:** A folder containing ipython notebook for data exploration and experiments.
-* **Models:** A folder containing the final trained model
-* **Images:** Contain all images used in the README.md file
+* **Notebooks:** A folder containing final results from every team member
+* **Results:** Contains all images and results used in the README.md file
+* **SETUP:** Contains virtual environment setup instructions
 * **README:** This file!
 
 ---
@@ -216,7 +229,9 @@ git support: Emre
 Data review and discussion: Whole team
 Discussion on readme file and next steps: Aakash, Amena, Ecce, Emre
 
-## Task assignment (for first half of week 2)
+## Task Completed (Week 2)
+
+**First half of week 2**
 Each team member will explore and compare multiple models. They will prepare a report with model code, interpretation, visualizations, evaluations and comparison. 
 We have listed the model choices below for each team member.
 - Aakash Bajaj: XGBoost, K-Nearest Neighbors (KNN)
@@ -226,41 +241,154 @@ We have listed the model choices below for each team member.
 - Emre Ozkan: Random Forest, K-Nearest Neighbors (KNN)
 - Haimeng (James) Wang: Bernoulli Naive Bayes, Decision Tree
 
+**Second half of week 2**
+We have listed the model choices below for each team member.
+- Aakash Bajaj: Updating README.md file with results
+- Amena Muzaffar Shumi: Finalization of results and code
+- Deeqa Mahamed: Git support and presentation for project showcase 
+- Ecce Djogbenou Epse Houenou: Updating README.md file with results
+- Emre Ozkan: Git support and result compilation 
+- Haimeng (James) Wang: Finalization of results and code & presentation for project showcase 
 ---
 # Exploratory data analysis
 ### Dataset Overview
-The dataset contains 4920 observations (rows), each representing a patient record.
-There are 134 columns, including 132 symptom features, one target variable (prognosis), and one extra column that was later removed (originally an index column from the CSV).
-The symptom features are binary (0 = absence, 1 = presence) indicating whether each symptom is observed for a patient.
-The target variable prognosis is categorical with 41 unique disease classes.
+
+- Both Training & Test dataset contains 1 target variable, `prognosis`  and 132 feature variables
+- There are a total of 4920 observations in Training dataset
+- There are a total of 42 observations in Test dataset
+- Both have 132 features which are binary (0 = absence, 1 = presence)
+- The target variable `prognosis` is categorical with 41 unique disease classes in both datasets
+- There are no missing values in any variable
+- There are 94 % of duplicates.
+**Dataset Quality Summary**
+<div align="center">
+
+| Property | Value |
+|---|---|
+| Missing Values (Train) | 0 |
+| Missing Values (Test) | 0 |
+| Feature Unique Values | 0, 1 (binary) |
+| Number of Disease Classes | 41 |
+| Min Samples per Class | 120 |
+| Max Samples per Class | 120 |
+| Mean Samples per Class | 120.0 |
+| Symptoms per Record (Min) | 3 |
+| Symptoms per Record (Max) | 17 |
+| Symptoms per Record (Mean) | 7.45 |
+| Symptoms per Record (Median) | 6.0 |
+| Mean Symptom Prevalence | 5.64% |
+| Max Symptom Prevalence | 39.27% |
+
+</div>
+
+## Target Variable
+
+- The Target variable `prognosis` column contains the disease labels. 
+- The 41 classes span infectious diseases contains 120 observations each. 
+
+**Class Balance for Target Variable**
+<p align="center">
+<img src="results/emre_results/eda_class_balance.png">
+</p>
+
+- Most individuals report between 3 and 6 symptoms, with fewer cases exhibiting a high symptom burden (>14 symptoms). 
+- This suggests moderate variability in symptom presentation across patients.
+
+**Average Number of Symptoms per Patient**
+<p align="center">
+<img src="results/Ecce_results/avg_symptoms_per_disease.png">
+</p>
+
+- Symptoms such as fatigue,vomiting, high fever appear frequently across multiple diseases.
+
+**Top 20 Reported Symptoms**
+<p align="center">
+<img src="results/james_results/top_symptoms.png">
+</p>
+
+- Certain diseases show strong associations with specific symptoms, which may help machine learning models distinguish between conditions.
+
+**Correlation Heatmap**
+<p align="center">
+<img src="results/emre_results/eda_top20_symptom_correlation.png">
+</p>
 
 ---
-# Modeling
+# Model Development and Evaluation
+
+## Model 1: Logistic Regression
+The first experiment involved training a Logistic Regression model, where the results were as follows:
+
+**Results Table: Logistic Regression**
+<div align="center">
+
+| Metric                   | Value (Logistic Regression) |
+| ------------------------ | ----- |
+| Accuracy                 | 1.00  |
+| Precision (Macro Avg)    | 1.00  |
+| Recall (Macro Avg)       | 1.00  |
+| F1 Score (Macro Avg)     | 1.00  |
+| Precision (Weighted Avg) | 1.00  |
+| Recall (Weighted Avg)    | 1.00  |
+| F1 Score (Weighted Avg)  | 1.00  |
+| Test Samples             | 42    |
+| Number of Classes        | 22    |
+
+</div>
+
+### Logistic regression Visualizations
+
+**Confusion Matrix - Logistic Regression**
+<p align="center">
+<img src="results/amena_results/logistic_regression_confusion_matrix.png">
+</p>
+
+### Logistic Regression Strengths and Limitations
+
+**Strengths:**
+- The Logistic regression model is simple and interpretable  and help to understand how each symptom contributes to predictions. 
+- It is Fast training and Works well with binary features. 
+- It provides probabilities for each disease prediction. 
+- It also has a low risk of overfitting.
+
+**Limitations:**
+
+- The Logistic regression model assumes linear relationships and may not capture complex interactions between symptoms. 
+- It is sensitive to imbalanced data – biased toward diseases with more samples. 
+- It performance depends on good preprocessing and feature selection. 
+- With small dataset, there is high accuracy which may not generalize to larger or noisier datasets.
+
 ## Model 2: Decision Tree Model
 The second experiment involved training a Decision Tree model, where the results were as follows: 
+
+**Results Table: Decision Tree Model**
+<div align="center">
+
 | Metric | Value (Decision Tree) |
 |---|---|
-| 5-Fold CV Accuracy | 1.0000 ± 0.0000 |
+| 5-Fold CV Accuracy | 1.0000 ± 0.00 |
 | Test Accuracy | **97.62%** |
 | Misclassifications | 1 / 42 |
 | Tree Depth | 55 |
 | Number of Leaves | 69 |
 
+</div>
+
 ### Decision Tree Model Visualizations
 
 **Decision Tree - First 3 Levels**
 <p align="center">
-  <img src="results/james_results/dt_tree.png" width="750" height = "400">
+  <img src="results/james_results/dt_tree.png">
 </p>
 
 **Confusion Matrix - Decision Tree (Test Set)**
 <p align="center">
-  <img src="results/james_results/confusion_matrix_dt.png" width="750" height = "400">
+  <img src="results/james_results/confusion_matrix_dt.png">
 </p>
 
 **Top 20 Feature Importance's — Decision Tree**
 <p align="center">
-  <img src="results/james_results/dt_feature_importance.png" width="750" height = "400">
+  <img src="results/james_results/dt_feature_importance.png">
 </p>
 
 ### Decision Tree Strengths and Limitations  
@@ -275,8 +403,104 @@ The second experiment involved training a Decision Tree model, where the results
 - In real-world data, an unpruned tree this deep would generalize poorly. Pruning (`max_depth`, `min_samples_leaf`) or using an ensemble (Random Forest) would be advisable.
 - The 1 misclassification (Fungal infection) suggests boundary cases exist where symptom overlap confuses the tree.
 
+## Model 3: Bernoulli Naive Bayes
+The third experiment involved training a Bernoulli Naive Bayes model, where the results were as follows:
+
+**Results Table: Bernoulli Naive Bayes Model**
+
+<div align="center">
+
+| Metric |                 Score |
+|--------|                -------|
+| Accuracy |                1.00 |
+| Precision (Macro Avg)    | 1.00 |
+| Recall (Macro Avg)       | 1.00 |
+| F1 Score (Macro Avg)     | 1.00 |
+| Precision (Weighted Avg) | 1.00 |
+| Recall (Weighted Avg)    | 1.00 |
+| F1 Score (Weighted Avg)  | 1.00 |
+
+</div>
+
+### Bernoulli Naive Bayes Visualizations
+
+**Confusion Matrix - Bernoulli Naive Bayes**
+
+<p align="center">
+<img src="results/Ecce_results/bernoulli_confusion_matrix.png">
+</p>
+
+### Bernoulli Naive Bayes Strengths and Limitations
+
+**Strengths:**
+- Bernoulli Naive Bayes model works well with binary features. 
+- It is computationally efficient, even with many features.
+- It can manage datasets with many symptoms and provides class probabilities, useful for confidence assessment.
+- It is simple and interpretable
+
+**Limitations:**
+
+- Bernoulli Naive Bayes model assumes feature independence. 
+- It cannot model interactions between symptoms and is sensitive to zero probabilities. 
+- It may underperform with small datasets and probabilities can be skewed if there is few samples per class.
+
+## Model 4: Random Forest
+The fourth experiment involved training a Random Forest model, where the results were as follows:
+
+**Results Table: Random Forest Model**
+
+<div align="center">
+
+| Metric |              Value (Random Forest) |
+|--------|               -------|
+| Accuracy |              0.976 |
+| Precision (Macro Avg) | 0.99 |
+| Recall (Macro Avg)     | 0.99 |
+| F1 Score (Macro Avg)   | 0.98 |
+| Precision (Weighted Avg) | 0.99 |
+| Recall (Weighted Avg)    | 0.98 |
+| F1 Score (Weighted Avg)  | 0.98 |
+| Best Min Sample Split| 2 |
+| Best Max Depth | None |
+| Best Number of Estimators | 100 |
+| Best CV Score | 1.0 |
+
+</div>
+
+### Random Forest Visualizations
+
+**Confusion Matrix - Random Forest**
+
+<p align="center">
+<img src="results/emre_results/rf_confusion_matrix.png">
+</p>
+
+**Top 30 Feature importance's — Random Forest**
+<p align="center">
+<img src="results/amena_results/rf_top_30_features.png">
+</p>
+- With an accuracy of 0.97619; Muscle pain, itching, etc are the top features identified.
+
+### Random Forest Strengths and Limitations
+
+**Strengths:**
+- Random forest captures complex, non-linear relationships and can handle symptom interactions automatically. 
+- It handles high-dimensional data and  robust even with many features. It is resistant to overfitting. 
+- It helps identify most predictive symptoms.
+
+**Limitations:**
+
+- Random Forest is less interpretable. 
+- It is computationally heavier, slower training and more memory usage than simple models. 
+- It is sensitive to imbalanced data. It requires setting random seeds for consistent results.
+- Overfitting is possible with small data.
+
 ## Model 5: XGBoost
 The fifth experiment involved training an XGBoost model, where the results were as follows:
+
+**Results Table: XGBoost**
+
+<div align="center">
 
 | Metric | Value (XGBoost) |
 |---|---|
@@ -288,21 +512,23 @@ The fifth experiment involved training an XGBoost model, where the results were 
 | Best Number of Estimators | 50 |
 <sup>*</sup> Fitting 5 folds for each of 27 candidates, totalling 135 fits.
 
+</div>
+
 ### XGBoost Visualizations
 
 **Confusion Matrix - XGBoost**
 <p align="center">
-  <img src="results/aakash_results/confusion_matrix_XGBoost.png" width="750" height = "400">
+  <img src="results/aakash_results/confusion_matrix_XGBoost.png">
 </p>
 
 **Top 20 Feature importance's — XGBoost**
 <p align="center">
-  <img src="results/aakash_results/xgb_feature_importance.png" width="750" height = "400">
+  <img src="results/aakash_results/xgb_feature_importance.png">
 </p>
 
 **SHAP Analysis — XGBoost**
 <p align="center">
-  <img src="results/aakash_results/xgb_shap_bar.png" width="750" height = "400">
+  <img src="results/aakash_results/xgb_shap_bar.png">
 </p>
 
 ### XGBoost Strengths and Limitations  
@@ -327,19 +553,23 @@ For investigating natural clusters in the data, the *Jaccard distance* measure w
 
 **Hierarchical Clustering - Dendrogram**
 <p align="center">
-  <img src="results/aakash_results/deeqa_HC_dendrogram.png" width="750" height = "400">
+<img src="results/aakash_results/deeqa_HC_dendrogram.png">
 </p>
-There appear to be ~41 'natural' clusters in the data set that even split into a roughly equal number of observations, matching the number of diseases.
+- There appear to be ~41 'natural' clusters in the data set that even split into a roughly equal number of observations, matching the number of diseases.
 
 - The *Agglomerative Hierarchical Clustering* model was fit and had an accuracy of **100%**.
 
 **Hierarchical Clustering - Prognosis Cluster Heat Map**
 <p align="center">
-  <img src="results/aakash_results/deeqa_HC_HeatMap.png" width="750" height = "400">
+  <img src="results/aakash_results/deeqa_HC_HeatMap.png">
 </p>
 
 ### KNN Clustering
 The results for KNN Clustering were as follows:
+
+**Results Table: KNN**
+
+<div align="center">
 
 | Metric | Value (KNN) |
 |---|---|
@@ -349,16 +579,18 @@ The results for KNN Clustering were as follows:
 | Best k| 1 |
 | Best k Accuracy | **100%**  |
 
+</div>
+
 ### KNN Visualizations
 
 **Confusion Matrix - KNN (k = 5)**
 <p align="center">
-  <img src="results/aakash_results/confusion_matrix_KNN_(k=5).png" width="750" height = "400">
+  <img src="results/aakash_results/confusion_matrix_KNN_(k=5).png">
 </p>
 
 **KNN — Macro F1 vs K**
 <p align="center">
-  <img src="results/aakash_results/knn_k_curve.png" width="750" height = "250">
+  <img src="results/aakash_results/knn_k_curve.png">
 </p>
 
 
@@ -389,8 +621,8 @@ The results for KNN Clustering were as follows:
   - k=1 identified as optimal, meaning the model functions as a lookup table rather than a generalizing classifier 
   -  No native interpretability, it cannot explain which symptoms drove a specific prediction, only which training cases were most similar
   - Prediction time scales linearly with training set size — becomes impractical at the scale of real hospital records without engineering investment
-
-## Model Comparisons
+---
+# Model Comparisons
 After fitting and evaluating the 6 Models described above, we have the following results 
 
 **Metric Comparisons**
@@ -409,8 +641,7 @@ After fitting and evaluating the 6 Models described above, we have the following
 
 **CV-Accuracy vs Test Accuracy - All Models**
 <p align="center">
-  <img src="results/comparison_results/accuracy_comparison.png" 
-  width="550" height = "200">
+  <img src="results/comparison_results/accuracy_comparison.png">
 </p>
 
 - CV & Test accuracy across different models is not very different.
@@ -418,16 +649,14 @@ After fitting and evaluating the 6 Models described above, we have the following
 
 **F1, Precision, Recall on Test set - All Models**
 <p align="center">
-  <img src="results/comparison_results/f1_precision_recall_comparison.png" 
-  width="550" height = "200">
+  <img src="results/comparison_results/f1_precision_recall_comparison.png">
 </p>
 
 - All models have nearly identical F1, Precision, Recall on Test set.
 
 **Accuracy vs Training Time - Efficiency tradeoff - All Models**
 <p align="center">
-  <img src="results/comparison_results/accuracy_vs_time.png" 
-  width="550" height = "200">
+  <img src="results/comparison_results/accuracy_vs_time.png">
 </p>
 
 - Logistic regression, Bernoulli Naive Bayes and KNN: These models are on the top left, implying highest time efficient and accuracy.  
@@ -436,8 +665,7 @@ After fitting and evaluating the 6 Models described above, we have the following
 
 **Multi-Metric Radar Chart - All Models**
 <p align="center">
-  <img src="results/comparison_results/radar_chart.png" 
-  width="550" height = "350">
+  <img src="results/comparison_results/radar_chart.png">
 </p>
 
 - The Multi metric polygon nearly overlaps for all the models for this dataset. This implies that all models are comparable in performance.
@@ -469,3 +697,8 @@ After fitting and evaluating the 6 Models described above, we have the following
 
 ---
 # References
+- https://github.com/slathwal/obesity-estimation/blob/main/README.md
+- https://github.com/UofT-DSI/git/blob/main/01_materials/git_cheatsheet.md
+- https://github.com/UofT-DSI/LCR
+- https://github.com/UofT-DSI/algorithms_and_data_structures
+- https://github.com/UofT-DSI/deep_learning

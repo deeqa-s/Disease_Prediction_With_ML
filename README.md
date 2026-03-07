@@ -34,7 +34,7 @@
     * [Model 3: Bernoulli Naive Bayes](#model-3-bernoulli-naive-bayes)
     * [Model 4: Random Forest](#model-4-random-forest)
     * [Model 5: XGBoost](#model-5-xgboost)
-    * [Model 6: Hierarchical and KNN Clustering](#model-6-hierarchical-and-knn-clustering)
+    * [Model 6: Hierarchical Clustering and KNN ](#model-6-hierarchical-clustering-and-knn)
 - [Model Comparisons](#model-comparisons)
 - [Conclusions](#conclusions)
 - [Future Directions](#future-directions)
@@ -232,6 +232,7 @@ Discussion on readme file and next steps: Aakash, Amena, Ecce, Emre
 ## Task Completed (Week 2)
 
 **First half of week 2**
+
 Each team member will explore and compare multiple models. They will prepare a report with model code, interpretation, visualizations, evaluations and comparison. 
 We have listed the model choices below for each team member.
 - Aakash Bajaj: XGBoost, K-Nearest Neighbors (KNN)
@@ -242,7 +243,8 @@ We have listed the model choices below for each team member.
 - Haimeng (James) Wang: Bernoulli Naive Bayes, Decision Tree
 
 **Second half of week 2**
-We have listed the model choices below for each team member.
+
+We have listed the contributions for each team member.
 - Aakash Bajaj: Updating README.md file with results
 - Amena Muzaffar Shumi: Finalization of results and code
 - Deeqa Mahamed: Git support and presentation for project showcase 
@@ -548,8 +550,8 @@ The fifth experiment involved training an XGBoost model, where the results were 
 - The model's boosting mechanism may have introduced a marginal degree of overfitting relative to simpler models.
 - It also had the longest training time at 5.991 seconds, making it a lot slower than other models for no gain in test accuracy. 
 
-## Model 6: Hierarchical and KNN Clustering
-The sixth experiment involved training two clustering algorithms -  Hierarchical Clustering (Unsupervised) and KNN Clustering (Supervised)
+## Model 6: Hierarchical Clustering and KNN 
+The sixth experiment involved training two clustering algorithms -  Hierarchical Clustering (Unsupervised) and KNN (Supervised)
 
 ### Hierarchical Clustering
 For investigating natural clusters in the data, the *Jaccard distance* measure was used as it can accommodate binary features.
@@ -567,8 +569,8 @@ For investigating natural clusters in the data, the *Jaccard distance* measure w
   <img src="results/aakash_results/deeqa_HC_HeatMap.png">
 </p>
 
-### KNN Clustering
-The results for KNN Clustering were as follows:
+### KNN 
+The results for KNN were as follows:
 
 **Results Table: KNN**
 

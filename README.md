@@ -7,7 +7,7 @@
 - [Amena Muzaffar Shumi](https://github.com/amena2712-del)
 - [Deeqa Mahamed](https://github.com/deeqa-s)
 - [Ecce Djogbenou Epse Houenou](https://github.com/eccehouenou)
-- [Emre Ozkan]()
+- [Emre Ozkan](https://github.com/mrozkan)
 - [Haimeng (James) Wang](https://github.com/hmwang-ca)
 ---
 # Contents 
@@ -193,7 +193,6 @@ Disease_Prediction_With_ML/
 │   ├── Aakash_xgb_knn.ipynb
 │   ├── All_Model_comparisons_together.ipynb
 │   ├── EDA_model_data_training.ipynb
-│   ├── EDA_Training_data.ipynb
 │   ├── emre-knn-random-forest.ipynb
 │   ├── Logistic-Random-Amena.ipynb
 │   └── Naive_Bayes_James.ipynb
@@ -333,7 +332,7 @@ The first experiment involved training a Logistic Regression model, where the re
 | Recall (Weighted Avg)    | 1.00  |
 | F1 Score (Weighted Avg)  | 1.00  |
 | Test Samples             | 42    |
-| Number of Classes        | 42    |
+| Number of Classes        | 41    |
 
 </div>
 
@@ -543,7 +542,7 @@ The fifth experiment involved training an XGBoost model, where the results were 
 - On the held-out test set it achieved high accuracy (97.62% ), correctly classifying 41 out of 42 disease cases. 
 - The grid search revealed a remarkably shallow but optimal configuration (max_depth=3, n_estimators=50, learning_rate=0.05), suggesting it did not require aggressive complexity to learn the underlying symptom-disease relationships. 
 - This model is very  explainable as it provides native feature importance scores and supports SHAP-based interpretability. 
-- The SHAP analysis identified the specific symptoms (`family_history` and `mild_fever`) with highest diagnostic impact across all 42 disease classes.
+- The SHAP analysis identified the specific symptoms (`family_history` and `mild_fever`) with highest diagnostic impact across all 41 disease classes.
 
 **Limitations:**
 - XGBoost model did not achieve perfect test set accuracy, misclassifying 1 out of 42 test cases (97.62%). 

@@ -204,6 +204,14 @@ Disease_Prediction_With_ML/
 │   ├── Ecce_results/
 │   ├── emre_results/
 │   └── james_results/
+|
+├── write-ups/
+|   ├── aakash_write_up.md
+|   ├── amena_write_up.pdf
+|   ├── ecce_write_up.md
+|   ├── emre_write_up.md
+|   ├── james_write_up.md
+|   ├── deeqa_write_up.md
 │
 ├── SETUP.md
 │
@@ -691,13 +699,13 @@ After fitting and evaluating the 6 Models described above, we have the following
 - Build a simple interactive symptom checker as a proof-of-concept clinical tool on top of the best interpretable model
 
 ---
-# Team Videos
-- [Aakash Bajaj]()
-- [Amena Muzaffar Shumi]()
+# Team Write Ups
+- [Aakash Bajaj](write-ups/aakash_write_up.md)
+- [Amena Muzaffar Shumi](write-ups/amena_write_up.pdf)
 - [Deeqa Mahamed]()
-- [Ecce Djogbenou Epse Houenou]()
-- [Emre Ozkan]()
-- [Haimeng (James) Wang]()
+- [Ecce Djogbenou Epse Houenou](write-ups/ecce_write_up.md)
+- [Emre Ozkan](write-ups/emre_write_up.md)
+- [Haimeng (James) Wang](write-ups/james_write_up.md)
 
 ---
 # References

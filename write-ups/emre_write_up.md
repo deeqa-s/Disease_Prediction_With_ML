@@ -1,0 +1,7 @@
+Hello, my name is Emre Ozkan. I currently work in the FinTech industry and I am expanding my knowledge in machine learning and data science. In this project, our team applied machine learning techniques using K-Nearest Neighbors (KNN) and Random Forest models on the same dataset to compare their performance and behavior.
+
+This group project involved building a machine learning analysis pipeline to predict diseases from patient-reported symptoms across 41 disease classes and 132 binary symptom features. The dataset was open source and obtained from Kaggle.
+
+The dataset we used was artificially created, which made it very clean and structured. Because of this, the KNN model achieved 100 percent accuracy, while the Random Forest model reached 97.62 percent accuracy. Since the data was synthetic and relatively simple, the models were able to learn the patterns very easily, which likely contributed to the high accuracy results.
+
+My main contribution to the project was helping the team organize the repository structure, supporting Git workflows, and ensuring the project stayed structured and easy to collaborate on. I also worked on generating comparison analysis between the KNN and Random Forest models. One limitation of the project is the synthetic dataset, and the models could be further improved and evaluated by using real-world data where patterns are more complex and noisy.
